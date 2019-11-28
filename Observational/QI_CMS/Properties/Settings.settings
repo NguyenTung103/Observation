@@ -1,0 +1,12 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="ES_CapDien.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="ES_CapDien_Service_TienIch_Service_TienIch" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://10.9.0.41/ServiceTienIch/Service_TienIch.asmx</Value>
+    </Setting>
+    <Setting Name="ES_CapDien_Service_CapDien_Service_CapDien" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://192.168.68.3:81/ServiceCapDienDvu/Service_CapDien.asmx</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
