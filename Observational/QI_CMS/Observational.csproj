@@ -267,6 +267,8 @@
     <Compile Include="Alarm.cs">
       <DependentUpon>ObservationEntitries.tt</DependentUpon>
     </Compile>
+    <Compile Include="AppCode\SitesService.cs" />
+    <Compile Include="AppCode\AreasService.cs" />
     <Compile Include="AppCode\ModelExtention.cs" />
     <Compile Include="AppCode\GroupService.cs" />
     <Compile Include="AppCode\UserProfileService.cs" />
@@ -283,8 +285,10 @@
       <DependentUpon>ObservationEntitries.tt</DependentUpon>
     </Compile>
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\SitesController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\DataController.cs" />
+    <Compile Include="Controllers\AreasController.cs" />
     <Compile Include="Controllers\NotificationController.cs" />
     <Compile Include="Controllers\ObservationalController.cs" />
     <Compile Include="Controllers\GroupsController.cs" />
@@ -3902,6 +3906,15 @@
     <Content Include="Views\Groups\GroupsManagement.cshtml" />
     <Content Include="Views\Groups\Update.cshtml" />
     <Content Include="Views\Groups\_GroupsPartial.cshtml" />
+    <Content Include="Views\Areas\AreasManagement.cshtml" />
+    <Content Include="Views\Areas\Create.cshtml" />
+    <Content Include="Views\Areas\Update.cshtml" />
+    <Content Include="Views\Areas\_KhuVucPartial.cshtml" />
+    <Content Include="Views\Sites\Create.cshtml" />
+    <Content Include="Views\Sites\SitesManagement.cshtml" />
+    <Content Include="Views\Sites\Update.cshtml" />
+    <Content Include="Views\Sites\_SitesPartial.cshtml" />
+    <Content Include="Views\Sites\_AreasPartialView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

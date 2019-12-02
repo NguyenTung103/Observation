@@ -14,5 +14,21 @@ namespace ES_CapDien.Models
         public StaticPagedList<GroupModel> Groups { get; set; }           
         public PagingInfo PagingInfo { get; set; }
     }
+    /// <summary>
+    /// Hiển thị dữ liệu và phân trang
+    /// </summary>
+    public class AreaViewModel
+    {
+        public StaticPagedList<AreaModel> Areas { get; set; }
+        public PagingInfo PagingInfo { get; set; }
+    }
+    /// <summary>
+    /// Hiển thị dữ liệu và phân trang
+    /// </summary>
+    public class SitesViewModel
+    {
+        public StaticPagedList<SiteModel> Sites { get; set; }
+        public PagingInfo PagingInfo { get; set; }
+    }
 
 }

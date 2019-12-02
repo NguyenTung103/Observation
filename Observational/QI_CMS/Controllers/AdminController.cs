@@ -1,5 +1,6 @@
 ﻿using Administrator;
 using System.Web.Mvc;
+using WebMatrix.WebData;
 
 namespace ES_CapDien.Controllers
 {
@@ -10,6 +11,12 @@ namespace ES_CapDien.Controllers
         public ActionResult DangNhap()
         {
             return RedirectToAction("GroupsManagement", "Groups");
+        }
+        [AllowAnonymous]
+        public ActionResult LogOff(string returnUrl)
+        {
+            WebSecurity.Logout();
+            return RedirectToAction("Login");
         }
     }
 }

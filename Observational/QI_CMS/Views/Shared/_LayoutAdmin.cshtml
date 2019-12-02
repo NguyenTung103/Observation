@@ -251,8 +251,8 @@
     <script src="~/Content/themes/ClipOne/plugins/dynatree/src/jquery.dynatree.js"></script>
     <script src="~/Scripts/Highcharts-4.0.1/js/highcharts.js"></script>
     <script src="~/Content/themes/ClipOne/js/main.js"></script>
-    <script src="~/Scripts/jquery.signalR-2.4.1.min.js"></script>
-    <script src="~/signalr/hubs"></script>
+    @*<script src="~/Scripts/jquery.signalR-2.4.1.min.js"></script>*@
+    @*<script src="~/signalr/hubs"></script>*@
     <script src="~/Content/themes/dist/sweetalert-dev.js"></script>
     <script src="~/Content/themes/ClipOne/plugins/bootstrap-modal/js/bootstrap-modal.js"></script>
     <script src="~/Content/themes/ClipOne/plugins/bootstrap-modal/js/bootstrap-modalmanager.js"></script>
@@ -314,70 +314,69 @@
         });
     </script>
     <script type="text/javascript">
-        $(function () {
-            $(window).on("load", updateNotification);
-            function updateNotification() {               
-                //$('#notiContent').empty();
-                //$('#notiContent').append($('<li>Đang tải...</li>'));
-                //$.ajax({
-                //    type: 'GET',
-                //    url: '/DashBoard/GetNotificationContacts',
-                //    success: function (response) {
-                //        $('#notiContent').empty();
-                //        if (response.length == 0) {
-                //            $('#notiContent').append($('<li class="nodataa">Chưa có dữ liệu...</li>'));
-                //        }
-                //        $.each(response, function (index, value) {
-                //            if (value.TrangThaiChinhSua == true) {
-                //                if (value.TrangThaiXoa == true) {
+        //$(function () {
+        //    $(window).on("load", updateNotification);
+        //    function updateNotification() {               
+        //        $('#notiContent').empty();
+        //        $('#notiContent').append($('<li>Đang tải...</li>'));
+        //        $.ajax({
+        //            type: 'GET',
+        //            url: '/DashBoard/GetNotificationContacts',
+        //            success: function (response) {
+        //                $('#notiContent').empty();
+        //                if (response.length == 0) {
+        //                    $('#notiContent').append($('<li class="nodataa">Chưa có dữ liệu...</li>'));
+        //                }
+        //                $.each(response, function (index, value) {
+        //                    if (value.TrangThaiChinhSua == true) {
+        //                        if (value.TrangThaiXoa == true) {
 
-                //                    $('#notiContent').append($("<li ><a href='/News/edit/" + value.Id + "?page=1&codeDonVi=" + value.CodeDonVi + "'><div class='clearfix'><div class='thread-image'><img alt src='" + value.ImageUrl + "'/></div><div class='thread-content'><span class='author'>" + value.Title + "</span><span class='preview'> Đơn vị: " + value.CodeDonVi + "<br/><span class='label label-sm label-danger'>đã xóa</span><span onclick='KhoiPhucNew(" + value.Id + ");' class='label label-default khoip' onclick>Khôi phục<span/></span><span class='time'>" + value.DateCreate + "</span></div></div></a></li>"));
-                //                }
-                //                else {
-                //                    $('#notiContent').append($("<li ><a href='/News/edit/" + value.Id + "?page=1&codeDonVi=" + value.CodeDonVi + "'><div class='clearfix'><div class='thread-image'><img alt src='" + value.ImageUrl + "'/></div><div class='thread-content'><span class='author'>" + value.Title + "</span><span class='preview'> Đơn vị: " + value.CodeDonVi + "<br/><span class='label label-sm label-warning'>đã chỉnh sửa</span></span><span class='time'>" + value.DateCreate + "</span></div></div></a></li>"));
-                //                }
-                //            }
-                //            else {
-                //                $('#notiContent').append($("<li ><a href='/News/edit/" + value.Id + "?page=1&codeDonVi=" + value.CodeDonVi + "'><div class='clearfix'><div class='thread-image'><img alt src='" + value.ImageUrl + "'/></div><div class='thread-content'><span class='author'>" + value.Title + "</span><span class='preview'> Đơn vị: " + value.CodeDonVi + "<br/><span class='label label-sm label-success'>nguyên bản</span></span><span class='time'>" + value.DateCreate + "</span></div></div></a></li>"));
-                //            }
-                //        });
-                //    },
-                //    error: function (error) {
-                //        console.log(error);
-                //    }
-                //})
-            }
+        //                            $('#notiContent').append($("<li ><a href='/News/edit/" + value.Id + "?page=1&codeDonVi=" + value.CodeDonVi + "'><div class='clearfix'><div class='thread-image'><img alt src='" + value.ImageUrl + "'/></div><div class='thread-content'><span class='author'>" + value.Title + "</span><span class='preview'> Đơn vị: " + value.CodeDonVi + "<br/><span class='label label-sm label-danger'>đã xóa</span><span onclick='KhoiPhucNew(" + value.Id + ");' class='label label-default khoip' onclick>Khôi phục<span/></span><span class='time'>" + value.DateCreate + "</span></div></div></a></li>"));
+        //                        }
+        //                        else {
+        //                            $('#notiContent').append($("<li ><a href='/News/edit/" + value.Id + "?page=1&codeDonVi=" + value.CodeDonVi + "'><div class='clearfix'><div class='thread-image'><img alt src='" + value.ImageUrl + "'/></div><div class='thread-content'><span class='author'>" + value.Title + "</span><span class='preview'> Đơn vị: " + value.CodeDonVi + "<br/><span class='label label-sm label-warning'>đã chỉnh sửa</span></span><span class='time'>" + value.DateCreate + "</span></div></div></a></li>"));
+        //                        }
+        //                    }
+        //                    else {
+        //                        $('#notiContent').append($("<li ><a href='/News/edit/" + value.Id + "?page=1&codeDonVi=" + value.CodeDonVi + "'><div class='clearfix'><div class='thread-image'><img alt src='" + value.ImageUrl + "'/></div><div class='thread-content'><span class='author'>" + value.Title + "</span><span class='preview'> Đơn vị: " + value.CodeDonVi + "<br/><span class='label label-sm label-success'>nguyên bản</span></span><span class='time'>" + value.DateCreate + "</span></div></div></a></li>"));
+        //                    }
+        //                });
+        //            },
+        //            error: function (error) {
+        //                console.log(error);
+        //            }
+        //        })
+        //    }
 
-            // update notification count
-            function updateNotificationCount(status, countnews) {
-                alert(1);
-                //if (status == "added") {
-                //    $('#signalr').html("<span class='badge'>" + countnews + "</span>");
-                //    $(".alert-dismissible").slideDown("slow", function () {
-                //        setInterval(function () { $(".alert-dismissible").fadeOut(4000); }, 7000);
-                //        playAudio();
-                //    });
-                //}
-            }
-            // signalr js code for start hub and send receive notification
-            var notificationHub = $.connection.notificationHubs1;
-            $.connection.hub.start().done(function () {
-            });
-            //signalR đẩy ngay trên client
-            notificationHub.client.notify = function (message, countnews) {
-                if (message) {
-                    if (message.trim().toLowerCase() == "added") {
-                        updateNotificationCount(message.trim().toLowerCase(), countnews);
-                        var url = document.URL;
-                        var check = url.includes("DashBoardManager");
-                        if (check == true) {
-                            GetData();
-                        }
-                    }
-                    updateNotification();
-                }
-            }
-        })
+        //    // update notification count
+        //    function updateNotificationCount(status, countnews) {               
+        //        if (status == "added") {
+        //            $('#signalr').html("<span class='badge'>" + countnews + "</span>");
+        //            $(".alert-dismissible").slideDown("slow", function () {
+        //                setInterval(function () { $(".alert-dismissible").fadeOut(4000); }, 7000);
+        //                playAudio();
+        //            });
+        //        }
+        //    }
+        //    // signalr js code for start hub and send receive notification
+        //    var notificationHub = $.connection.notificationHubs1;
+        //    $.connection.hub.start().done(function () {
+        //    });
+        //    //signalR đẩy ngay trên client
+        //    notificationHub.client.notify = function (message, countnews) {
+        //        if (message) {
+        //            if (message.trim().toLowerCase() == "added") {
+        //                updateNotificationCount(message.trim().toLowerCase(), countnews);
+        //                var url = document.URL;
+        //                var check = url.includes("DashBoardManager");
+        //                if (check == true) {
+        //                    GetData();
+        //                }
+        //            }
+        //            updateNotification();
+        //        }
+        //    }
+        //})
     </script>
 </body>
 <!-- end: BODY -->
