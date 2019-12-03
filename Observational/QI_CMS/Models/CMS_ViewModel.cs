@@ -22,6 +22,11 @@ namespace ES_CapDien.Models
         public StaticPagedList<AreaModel> Areas { get; set; }
         public PagingInfo PagingInfo { get; set; }
     }
+    public class ObservationsViewModel
+    {
+        public StaticPagedList<ObservationsModel> Observations { get; set; }
+        public PagingInfo PagingInfo { get; set; }
+    }
     /// <summary>
     /// Hiển thị dữ liệu và phân trang
     /// </summary>

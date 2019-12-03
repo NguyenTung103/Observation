@@ -60,6 +60,7 @@ namespace ES_CapDien.Controllers
                 {
                     Id = item.Id,
                     Name = item.Name,
+                    DeviceId = item.DeviceId,
                     Latitude = item.Latitude,
                     Longtitude = item.Longtitude,
                     CreateDay = item.CreateDay,

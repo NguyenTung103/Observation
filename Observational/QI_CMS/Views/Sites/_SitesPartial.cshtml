@@ -73,6 +73,14 @@
         </div>
         <div class="form-group">
             <div class="col-sm-1"></div>
+            <label class="col-sm-2 control-label" for="form-field-1">Thiết bị <span class="symbol required"></span></label>
+            <div class="col-sm-8">
+                @Html.TextBoxFor(item => item.DeviceId, new { @class = "form-control", @placeholder = "Nhập Id thiết bị" })
+                @Html.ValidationMessageFor(item => item.DeviceId)
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-1"></div>
             <label class="col-sm-2 control-label" for="form-field-1">Múi giờ<span class="symbol required"></span></label>
             <div class="col-sm-8">
                 @Html.TextBoxFor(item => item.TimeZone, new { @class = "form-control", @placeholder = "Nhập múi giờ" })

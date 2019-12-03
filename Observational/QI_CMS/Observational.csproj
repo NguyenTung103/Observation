@@ -67,6 +67,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Content\themes\ClipOne\plugins\ckfinder\bin\Release\CKFinder.dll</HintPath>
     </Reference>
+    <Reference Include="DnsClient, Version=1.0.7.0, Culture=neutral, PublicKeyToken=4574bb5573c51424, processorArchitecture=MSIL">
+      <HintPath>..\packages\DnsClient.1.0.7\lib\net45\DnsClient.dll</HintPath>
+    </Reference>
     <Reference Include="DotNet.Highcharts">
       <HintPath>..\..\DLL\DotNet.Highcharts.dll</HintPath>
     </Reference>
@@ -87,12 +90,6 @@
       <HintPath>..\DLL\Interop.Scripting.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
-    <Reference Include="Microsoft.AspNet.SignalR.Core, Version=2.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.SignalR.Core.2.3.0\lib\net45\Microsoft.AspNet.SignalR.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.AspNet.SignalR.SystemWeb">
-      <HintPath>..\packages\Microsoft.AspNet.SignalR.SystemWeb.2.2.0\lib\net45\Microsoft.AspNet.SignalR.SystemWeb.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
       <EmbedInteropTypes>True</EmbedInteropTypes>
@@ -105,6 +102,15 @@
     </Reference>
     <Reference Include="Microsoft.Owin.Security">
       <HintPath>..\packages\Microsoft.Owin.Security.2.1.0\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="MongoDB.Bson, Version=2.7.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MongoDB.Bson.2.7.0\lib\net45\MongoDB.Bson.dll</HintPath>
+    </Reference>
+    <Reference Include="MongoDB.Driver, Version=2.7.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MongoDB.Driver.2.7.0\lib\net45\MongoDB.Driver.dll</HintPath>
+    </Reference>
+    <Reference Include="MongoDB.Driver.Core, Version=2.7.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MongoDB.Driver.Core.2.7.0\lib\net45\MongoDB.Driver.Core.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -120,9 +126,15 @@
       <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.3.0\lib\netstandard1.1\System.Buffers.dll</HintPath>
+    </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.InteropServices.RuntimeInformation, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.InteropServices.RuntimeInformation.4.0.0\lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
+    </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.ServiceModel" />
@@ -267,6 +279,7 @@
     <Compile Include="Alarm.cs">
       <DependentUpon>ObservationEntitries.tt</DependentUpon>
     </Compile>
+    <Compile Include="AppCode\ObservationService.cs" />
     <Compile Include="AppCode\SitesService.cs" />
     <Compile Include="AppCode\AreasService.cs" />
     <Compile Include="AppCode\ModelExtention.cs" />
@@ -285,6 +298,7 @@
       <DependentUpon>ObservationEntitries.tt</DependentUpon>
     </Compile>
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\LoginAccountController.cs" />
     <Compile Include="Controllers\SitesController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\DataController.cs" />
@@ -352,6 +366,9 @@
     <Compile Include="Repository\IController.cs" />
     <Compile Include="Repository\IDbRepository.cs" />
     <Compile Include="Repository\IUnitOfWork.cs" />
+    <Compile Include="Repository\MongoDb\IRepository.cs" />
+    <Compile Include="Repository\MongoDb\MogoRepository.cs" />
+    <Compile Include="Repository\MongoDb\MongoBaseEntity.cs" />
     <Compile Include="Repository\UnitOfWork.cs" />
     <Compile Include="Repository\UserActionLogInfo.cs" />
     <Compile Include="Site.cs">
@@ -363,7 +380,6 @@
     <Compile Include="SmsServer.cs">
       <DependentUpon>ObservationEntitries.tt</DependentUpon>
     </Compile>
-    <Compile Include="Startup.cs" />
     <Compile Include="UserProfile.cs">
       <DependentUpon>ObservationEntitries.tt</DependentUpon>
     </Compile>
@@ -3588,11 +3604,8 @@
     <Content Include="Images\img-6.png" />
     <Content Include="Images\img-7.png" />
     <Content Include="Images\img-8.png" />
-    <Content Include="Images\Logoheader.png" />
     <Content Include="Images\noavatar.png" />
     <Content Include="Images\noprofile_lg.gif" />
-    <Content Include="Images\qcaophai.png" />
-    <Content Include="Images\qcngang.png" />
     <Content Include="Images\thongbao.png" />
     <Content Include="Images\tải xuống.png" />
     <Content Include="ObservationEntitries.Context.tt">
@@ -3675,8 +3688,6 @@
     <Content Include="Scripts\jquery-ui-1.8.20.min.js" />
     <Content Include="Scripts\jquery-ui-1.8.24.js" />
     <Content Include="Scripts\jquery-ui-1.8.24.min.js" />
-    <Content Include="Scripts\jquery.signalR-2.2.0.js" />
-    <Content Include="Scripts\jquery.signalR-2.2.0.min.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
@@ -3897,7 +3908,6 @@
     <Content Include="Style\mobile\fonts\fontawesome-webfontd41d.eot" />
     <Content Include="Views\Point\Management.cshtml" />
     <Content Include="Views\Notification\Management.cshtml" />
-    <Content Include="Views\Observational\Management.cshtml" />
     <Content Include="Views\Data\Management.cshtml" />
     <Content Include="Views\Point\_PointPartialView.cshtml" />
     <Content Include="Views\Point\Update.cshtml" />
@@ -3915,6 +3925,10 @@
     <Content Include="Views\Sites\Update.cshtml" />
     <Content Include="Views\Sites\_SitesPartial.cshtml" />
     <Content Include="Views\Sites\_AreasPartialView.cshtml" />
+    <Content Include="Views\Observational\Create.cshtml" />
+    <Content Include="Views\Observational\ElementManagement.cshtml" />
+    <Content Include="Views\Observational\Update.cshtml" />
+    <Content Include="Views\Observational\_ObservationPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -44,7 +44,7 @@ namespace ES_CapDien.Models
     {
         public int Id { get; set; }
         public int Area_Id { get; set; }
-        public int Group_Id { get; set; }
+        public int Group_Id { get; set; }       
         public string Name { get; set; }
         public string Address { get; set; }
         public string Latitude { get; set; }
@@ -61,6 +61,18 @@ namespace ES_CapDien.Models
         public string NguoiTao { get; set; }
         public string GroupsName { get; set; }
         public string AreasName { get; set; }
+    }
+    public partial class ObservationsModel
+    {
+        public int Id { get; set; }
+        public Nullable<bool> Noti_Alarm { get; set; }
+        public string Name { get; set; }
+        public string Code { get; set; }
+        public Nullable<System.DateTime> CreateDay { get; set; }
+        public Nullable<System.DateTime> UpdateDay { get; set; }
+        public string Low_Value { get; set; }
+        public string Hight_Value { get; set; }
+        public Nullable<bool> IsBieuDo { get; set; }
     }
 
 }
