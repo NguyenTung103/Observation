@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using System.Linq;
 using Core.Entities;
 
-namespace Qi.Crawler.Data
+namespace Qi.Data
 {
     public class MogoRepository<Entity> : IRepository<Entity> where Entity : MongoBaseEntity
     {

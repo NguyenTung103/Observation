@@ -279,6 +279,11 @@
     <Compile Include="Alarm.cs">
       <DependentUpon>ObservationEntitries.tt</DependentUpon>
     </Compile>
+    <Compile Include="MongoDb\Entity\DataAlarm.cs" />
+    <Compile Include="MongoDb\Interface\IDataAlarmService.cs" />
+    <Compile Include="MongoDb\Service\DataAlarmService.cs" />
+    <Compile Include="MongoDb\Service\DataObservationMongoService.cs" />
+    <Compile Include="MongoDb\Interface\IDataObservationService.cs" />
     <Compile Include="AppCode\ObservationService.cs" />
     <Compile Include="AppCode\SitesService.cs" />
     <Compile Include="AppCode\AreasService.cs" />
@@ -333,6 +338,7 @@
     </Compile>
     <Compile Include="Models\CMS_Model.cs" />
     <Compile Include="Models\CMS_ViewModel.cs" />
+    <Compile Include="MongoDb\Entity\DataObservation.cs" />
     <Compile Include="Observation.cs">
       <DependentUpon>ObservationEntitries.tt</DependentUpon>
     </Compile>
@@ -366,9 +372,9 @@
     <Compile Include="Repository\IController.cs" />
     <Compile Include="Repository\IDbRepository.cs" />
     <Compile Include="Repository\IUnitOfWork.cs" />
-    <Compile Include="Repository\MongoDb\IRepository.cs" />
-    <Compile Include="Repository\MongoDb\MogoRepository.cs" />
-    <Compile Include="Repository\MongoDb\MongoBaseEntity.cs" />
+    <Compile Include="MongoDb\IRepository.cs" />
+    <Compile Include="MongoDb\MogoRepository.cs" />
+    <Compile Include="MongoDb\MongoBaseEntity.cs" />
     <Compile Include="Repository\UnitOfWork.cs" />
     <Compile Include="Repository\UserActionLogInfo.cs" />
     <Compile Include="Site.cs">

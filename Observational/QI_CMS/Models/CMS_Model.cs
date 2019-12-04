@@ -1,4 +1,6 @@
 ﻿using ES_CapDien.Helpers;
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -8,6 +10,7 @@ namespace ES_CapDien.Models
 {
     ///Model
     /// 
+   
     public partial class GroupModel
     {
         public int Id { get; set; }
