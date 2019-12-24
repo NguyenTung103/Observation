@@ -34,7 +34,7 @@ namespace ES_CapDien
         public virtual DbSet<Area> Areas { get; set; }
         public virtual DbSet<Command> Commands { get; set; }
         public virtual DbSet<Datum> Data { get; set; }
-        public virtual DbSet<DataAlarm> DataAlarms { get; set; }
+        public virtual DbSet<DatumAlarm> DatumAlarms { get; set; }
         public virtual DbSet<Device> Devices { get; set; }
         public virtual DbSet<Group> Groups { get; set; }
         public virtual DbSet<Message_noti> Message_noti { get; set; }

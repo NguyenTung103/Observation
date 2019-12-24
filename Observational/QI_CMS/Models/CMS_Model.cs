@@ -27,6 +27,43 @@ namespace ES_CapDien.Models
         public string Email { get; set; }
         public bool IsActive { get; set; }
     }
+    public partial class DataObservationModel
+    {
+        public int Device_Id { get; set; }
+        public double BTI { get; set; }
+        public double BHU { get; set; }
+        public double BTO { get; set; }
+        public double BDR { get; set; }
+        public double BFL { get; set; }
+        public double BFR { get; set; }
+        public double BPS { get; set; }
+        public double BAV { get; set; }
+        public double BAP { get; set; }
+        public double BAC { get; set; }
+        public double BAF { get; set; }
+        public double BV1 { get; set; }
+        public double BC1 { get; set; }
+        public double BT1 { get; set; }
+        public double BV2 { get; set; }
+        public double BC2 { get; set; }
+        public double BT2 { get; set; }
+        public double BSE { get; set; }
+        public double BA1 { get; set; }
+        public double BB1 { get; set; }
+        public double BA2 { get; set; }
+        public double BB2 { get; set; }
+        public double BA3 { get; set; }
+        public double BB3 { get; set; }
+        public double BA4 { get; set; }
+        public double BB4 { get; set; }
+        public double BFA { get; set; }
+        public double BFD { get; set; }
+        public double BPW { get; set; }
+        public Nullable<bool> IsSEQ { get; set; }
+        public Nullable<System.DateTime> DateCreate { get; set; }
+        public double BWS { get; set; }
+        public string NameSite { get; set; }
+    }
     public partial class AreaModel
     {
         public int Id { get; set; }
@@ -77,5 +114,35 @@ namespace ES_CapDien.Models
         public string Hight_Value { get; set; }
         public Nullable<bool> IsBieuDo { get; set; }
     }
-
+    public partial class HomeModel
+    {
+        public int ThietBiKhongHoatDong { get; set; }
+        public int ThietBiHoatDong { get; set; }
+        public int ThietBiCanhBao { get; set; }        
+    }
+    public partial class DataAlarmMongo
+    {
+        public string Id { get; set; }
+        public int Device_Id { get; set; }
+        public string AMATI { get; set; }
+        public string AMIHU { get; set; }
+        public string AMADR { get; set; }
+        public string AMAFL { get; set; }
+        public string AMAFR { get; set; }
+        public string AMIPS { get; set; }
+        public string AMIAL { get; set; }
+        public string AMIAH { get; set; }
+        public string AMIAP { get; set; }
+        public string AMIAC { get; set; }
+        public string AMIGN { get; set; }
+        public string AMIAR { get; set; }
+        public string AMIL1 { get; set; }
+        public string AMIH1 { get; set; }
+        public string AMIT1 { get; set; }
+        public string AMIL2 { get; set; }
+        public string AMIH2 { get; set; }
+        public string AMIT2 { get; set; }
+        public System.DateTime TimeSend { get; set; }
+        public string NameSite { get; set; }
+    }
 }

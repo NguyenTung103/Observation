@@ -21,7 +21,7 @@ namespace ES_CapDien
         public Nullable<int> CreateBy { get; set; }
         public Nullable<int> UpdateBy { get; set; }
         public string Latitude { get; set; }
-        public string Longtitude { get; set; }  
+        public string Longtitude { get; set; }
         public int Group_Id { get; set; }
         public bool IsActive { get; set; }
     }

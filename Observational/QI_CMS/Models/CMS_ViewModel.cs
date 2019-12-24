@@ -35,5 +35,12 @@ namespace ES_CapDien.Models
         public StaticPagedList<SiteModel> Sites { get; set; }
         public PagingInfo PagingInfo { get; set; }
     }
+    public class DataObservationViewModel
+    {
+        public StaticPagedList<DataObservationModel> DataO { get; set; }
+        public PagingInfo PagingInfo { get; set; }
+        public DateTime? From { get; set; }
+        public DateTime? To { get; set; }
+    }
 
 }

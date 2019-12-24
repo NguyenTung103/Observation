@@ -4,15 +4,14 @@ using MongoDB.Bson.Serialization.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Web;
 
 namespace ES_CapDien.Models.Entity
 {
-    public class DataObservation : MongoBaseEntity
-    {
-        [BsonId]
-        public ObjectId _id { get; set; }
-
+    [BsonIgnoreExtraElements]
+    public class Data : MongoBaseEntity
+    {        
         [BsonDateTimeOptions]
         [BsonElement("DateCreate")]
         public DateTime DateCreate { get; set; }

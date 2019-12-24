@@ -51,5 +51,23 @@ namespace ES_CapDien.AppCode
             totalRow = query.Count();
             return query.Skip(skip).Take(take);
         }
+        /// <summary>
+        /// Lấy dữ liệu hiển thị ra băngr và phân trang
+        /// </summary>
+        /// <param name="skip">số bản ghi bỏ qua</param>
+        /// <param name="take">số bản ghi lấy</param>
+        /// <param name="totalRow">tổng số hàng</param>
+        /// <param name="title">title trang web</param>
+        /// <returns></returns>
+        public IQueryable<Site> GetByAreaId( int? areaId = null)
+        {
+            IQueryable<Site> query = sitesResponsitory.GetAll(); //Query lấy điều kiện dữ liệu
+            if (areaId.HasValue)
+            {
+                query = query.Where(q => q.Area_Id == areaId);
+            }          
+            query = query.OrderBy(q => q.Id); // Sắp xếp dữ liệu lấy ra theo thứ tự tăng dần           
+            return query;
+        }
     }
 }

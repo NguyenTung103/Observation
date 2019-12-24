@@ -279,10 +279,18 @@
     <Compile Include="Alarm.cs">
       <DependentUpon>ObservationEntitries.tt</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\BaseMongoController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Datum.cs">
+      <DependentUpon>ObservationEntitries.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DatumAlarm.cs">
+      <DependentUpon>ObservationEntitries.tt</DependentUpon>
+    </Compile>
     <Compile Include="MongoDb\Entity\DataAlarm.cs" />
     <Compile Include="MongoDb\Interface\IDataAlarmService.cs" />
-    <Compile Include="MongoDb\Service\DataAlarmService.cs" />
-    <Compile Include="MongoDb\Service\DataObservationMongoService.cs" />
+    <Compile Include="MongoDb\Data\DataAlarmData.cs" />
+    <Compile Include="MongoDb\Data\DataObservationMongoData.cs" />
     <Compile Include="MongoDb\Interface\IDataObservationService.cs" />
     <Compile Include="AppCode\ObservationService.cs" />
     <Compile Include="AppCode\SitesService.cs" />
@@ -314,12 +322,6 @@
     <Compile Include="C__MigrationHistory.cs">
       <DependentUpon>ObservationEntitries.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataAlarm.cs">
-      <DependentUpon>ObservationEntitries.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Datum.cs">
-      <DependentUpon>ObservationEntitries.tt</DependentUpon>
-    </Compile>
     <Compile Include="Device.cs">
       <DependentUpon>ObservationEntitries.tt</DependentUpon>
     </Compile>
@@ -338,7 +340,9 @@
     </Compile>
     <Compile Include="Models\CMS_Model.cs" />
     <Compile Include="Models\CMS_ViewModel.cs" />
-    <Compile Include="MongoDb\Entity\DataObservation.cs" />
+    <Compile Include="MongoDb\Entity\Data.cs" />
+    <Compile Include="MongoDb\Service\DataAlarmMongoService.cs" />
+    <Compile Include="MongoDb\Service\DataObservationMongoService.cs" />
     <Compile Include="Observation.cs">
       <DependentUpon>ObservationEntitries.tt</DependentUpon>
     </Compile>
@@ -3914,7 +3918,6 @@
     <Content Include="Style\mobile\fonts\fontawesome-webfontd41d.eot" />
     <Content Include="Views\Point\Management.cshtml" />
     <Content Include="Views\Notification\Management.cshtml" />
-    <Content Include="Views\Data\Management.cshtml" />
     <Content Include="Views\Point\_PointPartialView.cshtml" />
     <Content Include="Views\Point\Update.cshtml" />
     <Content Include="Views\Point\Create.cshtml" />
@@ -3935,6 +3938,18 @@
     <Content Include="Views\Observational\ElementManagement.cshtml" />
     <Content Include="Views\Observational\Update.cshtml" />
     <Content Include="Views\Observational\_ObservationPartial.cshtml" />
+    <Content Include="Views\Data\Management.cshtml" />
+    <Content Include="Views\Data\_SitePartialView.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\Management.cshtml" />
+    <Content Include="Views\Home\_DataAlarmPartialView.cshtml" />
+    <Content Include="Views\Home\_DataObservationParialView.cshtml" />
+    <Content Include="Views\Home\_DataTablePartialView.cshtml" />
+    <Content Include="Views\Home\_DetailAlarm.cshtml" />
+    <Content Include="Views\Home\_ListSitePartialView.cshtml" />
+    <Content Include="Views\Home\_ListSiteSearchPartialView.cshtml" />
+    <Content Include="Views\Home\_SitePartialView.cshtml" />
+    <Content Include="Views\Home\_ThongTinDiaDiemPartialView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ES_CapDien.AppCode.Interface
 {
-    public interface IDataObservationService : IRepository<DataObservation>
+    public interface IDataObservationService : IRepository<Data>
     {
     }
 }

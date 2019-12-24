@@ -9,9 +9,7 @@ using System.Web;
 namespace ES_CapDien.MongoDb.Entity
 {
     public class DataAlarm : MongoBaseEntity
-    {
-        [BsonId]
-        public ObjectId _id { get; set; }        
+    {       
         [BsonDateTimeOptions]
         [BsonElement("DateCreate")]
         public DateTime DateCreate { get; set; }
@@ -20,40 +18,40 @@ namespace ES_CapDien.MongoDb.Entity
         [BsonElement("Device_Id")]
         public int Device_Id { get; set; }
         [BsonElement("AMATI")]
-        public bool AMATI { get; set; }
+        public string AMATI { get; set; }
         [BsonElement("AMIHU")]
-        public bool AMIHU { get; set; }
+        public string AMIHU { get; set; }
         [BsonElement("AMADR")]
-        public bool AMADR { get; set; }
+        public string AMADR { get; set; }
         [BsonElement("AMAFL")]
-        public bool AMAFL { get; set; }
+        public string AMAFL { get; set; }
         [BsonElement("AMAFR")]
-        public bool AMAFR { get; set; }
+        public string AMAFR { get; set; }
         [BsonElement("AMIPS")]
-        public bool AMIPS { get; set; }
+        public string AMIPS { get; set; }
         [BsonElement("AMIAL")]
-        public bool AMIAL { get; set; }
+        public string AMIAL { get; set; }
         [BsonElement("AMIAH")]
-        public bool AMIAH { get; set; }
+        public string AMIAH { get; set; }
         [BsonElement("AMIAP")]
-        public bool AMIAP { get; set; }
+        public string AMIAP { get; set; }
         [BsonElement("AMIAC")]
-        public bool AMIAC { get; set; }
+        public string AMIAC { get; set; }
         [BsonElement("AMIGN")]
-        public bool AMIGN { get; set; }
+        public string AMIGN { get; set; }
         [BsonElement("AMIAR")]
-        public bool AMIAR { get; set; }
+        public string AMIAR { get; set; }
         [BsonElement("AMIL1")]
-        public bool AMIL1 { get; set; }
+        public string AMIL1 { get; set; }
         [BsonElement("AMIH1")]
-        public bool AMIH1 { get; set; }
+        public string AMIH1 { get; set; }
         [BsonElement("AMIT1")]
-        public bool AMIT1 { get; set; }
+        public string AMIT1 { get; set; }
         [BsonElement("AMIL2")]
-        public bool AMIL2 { get; set; }
+        public string AMIL2 { get; set; }
         [BsonElement("AMIH2")]
-        public bool AMIH2 { get; set; }
+        public string AMIH2 { get; set; }
         [BsonElement("AMIT2")]
-        public bool AMIT2 { get; set; }
+        public string AMIT2 { get; set; }
     }
 }

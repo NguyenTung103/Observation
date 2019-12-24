@@ -9,9 +9,9 @@ using System.Web;
 
 namespace ES_CapDien.AppCode
 {
-    public class DataAlarmService : MogoRepository<ES_CapDien.MongoDb.Entity.DataAlarm>, IDataAlarmService
+    public class DataAlarmData : MogoRepository<ES_CapDien.MongoDb.Entity.DataAlarm>
     {              
-        public DataAlarmService()
+        public DataAlarmData()
         {            
             
         }

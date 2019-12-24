@@ -32,7 +32,7 @@ namespace Qi.Data
             var connection = "mongodb://localhost:27017";
             var mongoUrl = MongoUrl.Create(connection);
             var client = new MongoClient(mongoUrl);
-            mongoDatabase = client.GetDatabase(mongoUrl.DatabaseName);
+            mongoDatabase = client.GetDatabase("DataObservation");
             Entitys = mongoDatabase.GetCollection<Entity>(typeof(Entity).Name);
         }
 
@@ -71,7 +71,7 @@ namespace Qi.Data
         /// <returns>Entity</returns>
         public virtual Entity FindByKey(object pk)
         {
-            return Entitys.Find(q => q.Id == pk.ToString()).FirstOrDefault();
+            return Entitys.Find(q => q._id == pk.ToString()).FirstOrDefault();
         }
 
         /// <summary>
@@ -81,9 +81,18 @@ namespace Qi.Data
         /// <returns>Entity</returns>
         public virtual async Task<Entity> FindByKeyAsync(object pk)
         {
-            return (await Entitys.FindAsync(q => q.Id == pk.ToString())).FirstOrDefault();
+            return (await Entitys.FindAsync(q => q._id == pk.ToString())).FirstOrDefault();
+        }              
+        /// <summary>
+        /// Lấy toàn bộ tập hợp các đối tượng
+        /// </summary>
+        /// <returns>IQueryable Entity</returns>
+        public virtual IEnumerable<Entity> FindOption(Expression<Func<Entity, bool>> predicate,int limit, int skip, out long total)
+        {
+            var query = Entitys.Find(predicate);
+            total = query.CountDocuments();
+            return query.Limit(limit).Skip(skip).ToList();
         }
-
         /// <summary>
         /// Tìm đối tượng theo khóa chính đầu tiên
         /// </summary>
@@ -91,7 +100,7 @@ namespace Qi.Data
         /// <returns>Entity</returns>
         public virtual Entity FindByKeyNoTracking(object pk)
         {
-            return Entitys.Find(q => q.Id == pk.ToString()).FirstOrDefault();
+            return Entitys.Find(q => q._id == pk.ToString()).FirstOrDefault();
         }
 
         /// <summary>
@@ -101,7 +110,7 @@ namespace Qi.Data
         /// <returns>Entity</returns>
         public virtual async Task<Entity> FindByKeyNoTrackingAsync(object pk)
         {
-            return (await Entitys.FindAsync(q => q.Id == pk.ToString())).FirstOrDefault();
+            return (await Entitys.FindAsync(q => q._id == pk.ToString())).FirstOrDefault();
         }
 
         /// <summary>
@@ -299,7 +308,7 @@ namespace Qi.Data
             }
 
             entity.UpdatedTime = DateTime.Now;
-            var replaceReutl = Entitys.ReplaceOne(q => q.Id == entity.Id, entity);
+            var replaceReutl = Entitys.ReplaceOne(q => q._id == entity._id, entity);
             return replaceReutl.ModifiedCount > 0;
         }
 
@@ -316,7 +325,7 @@ namespace Qi.Data
             }
 
             entity.UpdatedTime = DateTime.Now;
-            var replaceReutl = await Entitys.ReplaceOneAsync(q => q.Id == entity.Id, entity);
+            var replaceReutl = await Entitys.ReplaceOneAsync(q => q._id == entity._id, entity);
             return replaceReutl.ModifiedCount > 0;
         }
 
@@ -333,7 +342,7 @@ namespace Qi.Data
             foreach (var item in entities)
             {
                 item.UpdatedTime = DateTime.Now;
-                Entitys.ReplaceOne(q => q.Id == item.Id, item);
+                Entitys.ReplaceOne(q => q._id == item._id, item);
             }
             return true;
         }
@@ -351,7 +360,7 @@ namespace Qi.Data
             foreach (var item in entities)
             {
                 item.UpdatedTime = DateTime.Now;
-                await Entitys.ReplaceOneAsync(q => q.Id == item.Id, item);
+                await Entitys.ReplaceOneAsync(q => q._id == item._id, item);
             }
             return true;
         }
@@ -393,8 +402,8 @@ namespace Qi.Data
                 throw new ArgumentNullException(nameof(entities));
             }
 
-            var ids = entities.Select(q => q.Id).ToList();
-            var deleteResult = Entitys.DeleteMany(q => ids.Contains(q.Id));
+            var _ids = entities.Select(q => q._id).ToList();
+            var deleteResult = Entitys.DeleteMany(q => _ids.Contains(q._id));
             return deleteResult.DeletedCount > 0;
         }
 
@@ -411,8 +420,8 @@ namespace Qi.Data
                 throw new ArgumentNullException(nameof(entities));
             }
 
-            var ids = entities.Select(q => q.Id).ToList();
-            var deleteResult = await Entitys.DeleteManyAsync(q => ids.Contains(q.Id));
+            var _ids = entities.Select(q => q._id).ToList();
+            var deleteResult = await Entitys.DeleteManyAsync(q => _ids.Contains(q._id));
             return deleteResult.DeletedCount > 0;
         }
 
@@ -428,7 +437,7 @@ namespace Qi.Data
                 throw new ArgumentNullException(nameof(entity));
             }
 
-            var deleteResult = Entitys.DeleteOne(q => q.Id == entity.Id);
+            var deleteResult = Entitys.DeleteOne(q => q._id == entity._id);
             return deleteResult.DeletedCount > 0;
         }
 
@@ -444,7 +453,7 @@ namespace Qi.Data
                 throw new ArgumentNullException(nameof(entity));
             }
 
-            var deleteResult = await Entitys.DeleteOneAsync(q => q.Id == entity.Id);
+            var deleteResult = await Entitys.DeleteOneAsync(q => q._id == entity._id);
             return deleteResult.DeletedCount > 0;
         }
 

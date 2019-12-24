@@ -3,14 +3,12 @@ using System.Web.Mvc;
 using WebMatrix.WebData;
 
 namespace ES_CapDien.Controllers
-{
-    [Authorize]
+{    
     public class AdminController : Controller
-    {
-        [AuthorizeRoles]
+    {        
         public ActionResult DangNhap()
         {
-            return RedirectToAction("GroupsManagement", "Groups");
+            return Redirect("Administrator/Account/Login");
         }
         [AllowAnonymous]
         public ActionResult LogOff(string returnUrl)

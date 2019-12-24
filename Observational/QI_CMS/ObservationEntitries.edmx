@@ -482,7 +482,7 @@
           <EntitySet Name="Areas" EntityType="ObservationModel.Area" />
           <EntitySet Name="Commands" EntityType="ObservationModel.Command" />
           <EntitySet Name="Data" EntityType="ObservationModel.Datum" />
-          <EntitySet Name="DataAlarms" EntityType="ObservationModel.DataAlarm" />
+          <EntitySet Name="DatumAlarms" EntityType="ObservationModel.DatumAlarm" />
           <EntitySet Name="Devices" EntityType="ObservationModel.Device" />
           <EntitySet Name="Groups" EntityType="ObservationModel.Group" />
           <EntitySet Name="Message_noti" EntityType="ObservationModel.Message_noti" />
@@ -642,7 +642,7 @@
           <Property Name="TimeSend" Type="DateTime" Precision="3" />
           <Property Name="BWS" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
         </EntityType>
-        <EntityType Name="DataAlarm">
+        <EntityType Name="DatumAlarm">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -1045,8 +1045,8 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="DataAlarms">
-            <EntityTypeMapping TypeName="ObservationModel.DataAlarm">
+          <EntitySetMapping Name="DatumAlarms">
+            <EntityTypeMapping TypeName="ObservationModel.DatumAlarm">
               <MappingFragment StoreEntitySet="DataAlarm">
                 <ScalarProperty Name="TimeSend" ColumnName="TimeSend" />
                 <ScalarProperty Name="AMIT2" ColumnName="AMIT2" />

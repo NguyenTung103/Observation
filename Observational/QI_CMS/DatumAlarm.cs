@@ -12,7 +12,7 @@ namespace ES_CapDien
     using System;
     using System.Collections.Generic;
     
-    public partial class DataAlarm
+    public partial class DatumAlarm
     {
         public int Id { get; set; }
         public int Device_Id { get; set; }
