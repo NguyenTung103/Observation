@@ -1,4 +1,4 @@
-﻿@model ES_CapDien.Models.DataSyntheticViewModel
+﻿@model ES_CapDien.Models.DataObservationViewModel
 @using PagedList.Mvc
 @{
     ViewBag.Title = "Dữ liệu tổng hợp";
@@ -9,11 +9,11 @@
         $(document).ready(function () {
             var reload;
             $('#fromDate').daterangepicker({
-                singleDatePicker: true, format: 'DD/MM/YYYY'
+                singleDatePicker: true, format: 'DD/MM/YYYY HH:mm A'
             }, function (start, end, label) {
             });
             $('#toDate').daterangepicker({
-                singleDatePicker: true, format: 'DD/MM/YYYY'
+                singleDatePicker: true, format: 'DD/MM/YYYY HH:mm A'
             }, function (start, end, label) {
             });
             $(document).ajaxStart(function () {
@@ -28,6 +28,12 @@
             $("#runRealTime").click(function () {
                 var setTime = document.getElementById("setTime").value;
                 if (setTime > 6) {
+                    Swal.fire(
+                        'Thành công !',
+                        'Bắt đầu thực hiện',
+                        'success'
+                    );
+                    $("#stop").css("display", "block");
                     reload = setInterval(function () {
                         Data();
                     }, setTime * 1000);
@@ -42,6 +48,12 @@
 
             });
             $("#stop").click(function () {
+                Swal.fire(
+                    'Thành công !',
+                    'Dừng thực hiện',
+                    'success'
+                )
+                $("#stop").css("display", "none");
                 clearInterval(reload);
             });
 
@@ -74,7 +86,7 @@
             submitform();
         };
 
-/**/</script>
+        /**/</script>
 }
 <div class="row">
     <div class="col-md-12" style="text-align:center; position:absolute;">
@@ -82,13 +94,6 @@
     </div>
 </div>
 <div class="col-md-12">
-    <div class="page-header">
-        <div class="row">
-            <div class="col-md-7">
-                <h1 class="titlepageas"><a class="homcomback" href="/DashBoard/DashBoardManager"><img src="~/Images/home.png" /></a>Dữ liệu tổng hợp</h1>
-            </div>
-        </div>
-    </div>
     <div id="loadmesenger">
         @Html.Partial("~/Views/Shared/_MessagePartial.cshtml")
     </div>
@@ -116,7 +121,41 @@
                                         {
                                             foreach (var item in ViewBag.lstArea)
                                             {
-                                                <option value="@item.Id">@item.Name</option>
+                                                if (item.Id.ToString() == Request.Params["areaID"])
+                                                {
+                                                    <option value="@item.Id" selected="selected">@item.Name</option>
+                                                }
+                                                else
+                                                {
+                                                    <option value="@item.Id">@item.Name</option>
+                                                }
+
+                                            }
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 form-horizontal">
+                            <div class="row form-group">
+                                <label class="col-sm-3 control-label" for="form-field-1">
+                                    Trạm
+                                </label>
+                                <div class="col-sm-9">
+                                    <select class="form-control search-select" id="siteId" name="siteId">
+                                        <option value="">--- Trạm ---</option>
+                                        @if (ViewBag.lstTram != null)
+                                        {
+                                            foreach (var item in ViewBag.lstTram)
+                                            {
+                                                if (item.Id.ToString() == Request.Params["siteId"])
+                                                {
+                                                    <option value="@item.Id" selected="selected">@item.Name</option>
+                                                }
+                                                else
+                                                {
+                                                    <option value="@item.Id">@item.Name</option>
+                                                }
                                             }
                                         }
                                     </select>
@@ -130,7 +169,7 @@
                                 </label>
                                 <div class="col-sm-9">
                                     <div class="input-group">
-                                        <input type="text" id="fromDate" name="fromDate" data-date-format="dd-mm-yyyy" autocomplete="off" data-date-viewmode="years" class="form-control date-picker" value="@(Model.FromDate == null ? "": Model.FromDate.Value.ToString("dd/MM/yyyy"))" onchange="check_date(this)">
+                                        <input type="text" id="fromDate" name="fromDate" data-date-format="dd-mm-yyyy" autocomplete="off" data-date-viewmode="years" class="form-control date-picker" value="@(Model.From == null ? "": Model.From.Value.ToString("dd/MM/yyyy"))" onchange="check_date(this)">
                                         <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
                                     </div>
                                 </div>
@@ -143,17 +182,12 @@
                                 </label>
                                 <div class="col-sm-9">
                                     <div class="input-group">
-                                        <input type="text" id="toDate" name="toDate" data-date-format="dd-mm-yyyy" autocomplete="off" data-date-viewmode="years" class="form-control date-picker" value="@(Model.ToDate == null ? "": Model.ToDate.Value.ToString("dd/MM/yyyy"))" onchange="check_date(this)">
+                                        <input type="text" id="toDate" name="toDate" data-date-format="dd-mm-yyyy" autocomplete="off" data-date-viewmode="years" class="form-control date-picker" value="@(Model.To == null ? "": Model.To.Value.ToString("dd/MM/yyyy"))" onchange="check_date(this)">
                                         <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-md-3 form-horizontal">
-                            <button class="btn btn-primary fill-data-cus" type="submit" id="btn_Submit">
-                                <i class="clip-search-2"></i>Lọc dữ liệu
-                            </button>
-                        </div>
+                        </div>                        
                     </div>
                     <div class="row">
                         <div class="col-md-3 form-horizontal">
@@ -174,11 +208,16 @@
                                     </button>
                                 </div>
                                 <div class="col-md-6">
-                                    <button class="btn btn-danger fill-data-cus" type="button" id="stop">
+                                    <button class="btn btn-danger fill-data-cus" type="button" id="stop" style="display:none;">
                                         Dừng
                                     </button>
                                 </div>
                             </div>
+                        </div>
+                        <div class="col-md-3 form-horizontal">
+                            <button class="btn btn-primary fill-data-cus" type="submit" id="btn_Submit">
+                                <i class="clip-search-2"></i>Lọc dữ liệu
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -204,20 +243,20 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var item in Model.Data)
+                        @foreach (var item in Model.DataO)
                         {
                             <tr>
-                                <td class="center">@(Model.Data.ToList().IndexOf(item) + 1)</td>
-                                <td class="center">@item.SiteName</td>
-                                <td>@item.DateCreate</td>
-                                <td>@item.BTI</td>
-                                <td>@item.BTO</td>
-                                <td>@item.BHU</td>
-                                <td>@item.BWS</td>
-                                <td>@item.BAP</td>
-                                <td>@item.BAV</td>                                
-                                <td>@item.BAC</td>
-                                <td>@item.BAF</td>                               
+                                <td class="center">@(Model.DataO.ToList().IndexOf(item) + 1)</td>
+                                <td>@item.NameSite.Trim()</td>
+                                <td class="center">@item.DateCreate</td>
+                                <td class="center">@item.BTI</td>
+                                <td class="center">@item.BTO</td>
+                                <td class="center">@item.BHU</td>
+                                <td class="center">@item.BWS</td>
+                                <td class="center">@item.BAP</td>
+                                <td class="center">@item.BAV</td>
+                                <td class="center">@item.BAC</td>
+                                <td class="center">@item.BAF</td>
                             </tr>
                         }
                     </tbody>
@@ -246,7 +285,7 @@
                     </div>
                 </div>
                 <div class="col-md-7">
-                    @Html.PagedListPager((PagedList.IPagedList)Model.Data, page => Url.Action("Management", new { page, pageSize = Request.Params["pageSize"], areaID = Request.Params["areaID"], fromDate = Request.Params["fromDate"], toDate = Request.Params["toDate"] }))
+                    @Html.PagedListPager((PagedList.IPagedList)Model.DataO, page => Url.Action("Management", new { page, pageSize = Request.Params["pageSize"], areaID = Request.Params["areaID"], fromDate = Request.Params["fromDate"], toDate = Request.Params["toDate"] }))
                 </div>
             </div>
         </div>

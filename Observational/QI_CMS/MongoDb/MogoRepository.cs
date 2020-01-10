@@ -90,6 +90,7 @@ namespace Qi.Data
         public virtual IEnumerable<Entity> FindOption(Expression<Func<Entity, bool>> predicate,int limit, int skip, out long total)
         {
             var query = Entitys.Find(predicate);
+            query = query.SortByDescending(i => i._id);
             total = query.CountDocuments();
             return query.Limit(limit).Skip(skip).ToList();
         }

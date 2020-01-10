@@ -19,6 +19,12 @@ namespace ES_CapDien.MongoDb.Service
             totalRow = list.Count();            
             return list;
         }
+        public ES_CapDien.MongoDb.Entity.DataAlarm FindByKey(string alarmId)
+        {
+            ES_CapDien.MongoDb.Entity.DataAlarm entity = new ES_CapDien.MongoDb.Entity.DataAlarm();
+            entity = data.FindByKey(alarmId);            
+            return entity;
+        }
         public List<DataAlarm> GetDataPaging(DateTime fromDate,DateTime toDate, int skip, int limit, int deviceId, out int total)
         {
             List<DataAlarm> list = new List<DataAlarm>();           

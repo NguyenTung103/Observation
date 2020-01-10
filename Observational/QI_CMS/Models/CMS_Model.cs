@@ -83,8 +83,10 @@ namespace ES_CapDien.Models
     public partial class SiteModel
     {
         public int Id { get; set; }
+        [Required(ErrorMessage = "Khu vực không được để trống")]
         public int Area_Id { get; set; }
-        public int Group_Id { get; set; }       
+        public int Group_Id { get; set; }
+        [Required(ErrorMessage = "Tên trạm không được để trống")]
         public string Name { get; set; }
         public string Address { get; set; }
         public string Latitude { get; set; }
@@ -95,6 +97,7 @@ namespace ES_CapDien.Models
         public Nullable<int> CreateBy { get; set; }
         public Nullable<int> UpdateBy { get; set; }
         public bool IsActive { get; set; }
+        [Required(ErrorMessage = "Id thiết bị không được để trống")]
         public Nullable<int> DeviceId { get; set; }
         public string NameGroups { get; set; }
         public string NameAreas { get; set; }

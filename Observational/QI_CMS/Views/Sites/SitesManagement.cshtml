@@ -112,6 +112,7 @@
                         <th class="center"></th>
                         <th class="center">STT</th>
                         <th class="center">Name</th>
+                        <th class="center">DeviceId</th>
                         <th class="center">Ngày tạo</th>
                         <th class="center">Ngày Cập nhật</th>
                         <th class="center">Người tạo</th>
@@ -136,6 +137,7 @@
                         </td>
                         <td class="center">@(Model.Sites.ToList().IndexOf(item) + 1)</td>
                         <td>@item.Name</td>
+                        <td>@item.DeviceId</td>
                         <td>@item.CreateDay</td>
                         <td>@item.UpdateDay</td>
                         <td>@item.NguoiTao</td>

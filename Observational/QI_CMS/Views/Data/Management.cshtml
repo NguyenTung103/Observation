@@ -6,14 +6,7 @@
 }
 @section PageScripts{
     <script type="text/javascript">
-        $(document).ready(function () {
-            var reload;
-            $('#fromDate').daterangepicker({
-                singleDatePicker: true, format: 'DD/MM/YYYY'
-            }, function (start, end, label) {
-            });
 
-        });
         function deleteVtu(e) {
             swal({
                 title: 'Bạn có chắc chắn muốn xóa ?',
@@ -92,15 +85,17 @@
             submitform();
         };
     </script>
+    <script type="text/javascript">
+        //https://eonasdan.github.io/bootstrap-datetimepicker/#date-only
+        $(function () {
+            $('.datetimepicker').datetimepicker({
+                format: 'DD/MM/YYYY HH:mm A',
+                locale: 'vi',
+            });
+        });
+    </script>
 }
-<div class="col-md-12">
-    <div class="page-header">
-        <div class="row">
-            <div class="col-md-7">
-                <h1 class="titlepageas"><a class="homcomback" href="/DashBoard/DashBoardManager"><img src="~/Images/home.png" /></a>Báo cáo dữ liệu</h1>
-            </div>
-        </div>
-    </div>
+<div class="col-md-12">    
     <div id="loadmesenger">
         @Html.Partial("~/Views/Shared/_MessagePartial.cshtml")
     </div>
@@ -109,7 +104,7 @@
             <i class="fa fa-external-link-square"></i>
             <strong>Báo cáo dữ liệu</strong>
             <div class="panel-tools">
-                <a class="btn btn-primary btn-xs" href="@Url.Action("ExportExel","Data", new {siteID= Request.Params["siteID"],fromDate= Request.Params["fromDate"] })">
+                <a class="btn btn-primary btn-xs" href="@Url.Action("ExportExel","Data", new {siteID= Request.Params["siteID"],fromDate= Request.Params["fromDate"], toDate=Request.Params["toDate"] })">
                     <i class="fa fa-plus"></i>
                     Xuất excel
                 </a>
@@ -123,7 +118,7 @@
             {
                 <input type="hidden" id="pageSize" name="pageSize" value="@Request.Params["pageSize"]" />
                 <div class="row">
-                    <div class="col-md-3 form-horizontal">
+                    <div class="col-md-3 col-sm-3 col-lg-3 form-horizontal">
                         <div class="row form-group">
                             <label class="col-sm-3 control-label" for="form-field-1">
                                 Khu vực
@@ -150,7 +145,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-3 form-horizontal">
+                    <div class="col-md-3 col-sm-3 col-lg-3 form-horizontal">
                         <div class="row form-group">
                             <label class="col-sm-3 control-label" for="form-field-1">
                                 Trạm
@@ -178,29 +173,50 @@
                                 </select>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-3 form-horizontal">
-                        <div class="row form-group">
-                            <label class="col-sm-3 control-label" for="form-field-1">
-                                Ngày
-                            </label>
-                            <div class="col-sm-9">
-                                <div class="input-group">
-                                    <input type="text" id="fromDate" name="fromDate" data-date-format="dd-mm-yyyy" autocomplete="off" data-date-viewmode="years" class="form-control date-picker" value="@(Model.From == null ? "": Model.From.Value.ToString("dd/MM/yyyy"))" onchange="check_date(this)">
-                                    <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 form-horizontal">
+                    </div>                    
+                    <div class="col-md-3 col-sm-3 col-lg-3 form-horizontal">
                         <div class="row form-group">
                             <label class="col-sm-3 control-label" for="form-field-1">
                                 Bước
                             </label>
                             <input type="text" name="buoc" value="@Request.Params["buoc"]" />
                         </div>
-                    </div>
+                    </div>                    
+                </div>
+                <div class="row">
                     <div class="col-md-3 form-horizontal">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label" for="form-field-1">
+                                Từ ngày
+                            </label>
+                            <div class="col-sm-9">
+                                <div class='input-group'>
+                                    <input type='text' name="fromDate" class="form-control datetimepicker" autocomplete="off" data-date-viewmode="years" onchange="check_date(this)" value="@(Model.From ==null ? " ": Model.From.Value.ToString())" />
+                                    <span class="input-group-addon">
+                                        <span class="fa fa-calendar">
+                                        </span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-3 col-lg-3 form-horizontal">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label" for="form-field-1">
+                                Đến ngày
+                            </label>
+                            <div class="col-sm-9">
+                                <div class='input-group'>
+                                    <input type='text' name="toDate" class="form-control datetimepicker" autocomplete="off" data-date-viewmode="years" onchange="check_date(this)" value="@(Model.To ==null ? " ": Model.To.Value.ToString())" />
+                                    <span class="input-group-addon">
+                                        <span class="fa fa-calendar">
+                                        </span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-3 col-lg-3 form-horizontal">
                         <button class="btn btn-primary fill-data-cus" type="submit" id="btn_Submit">
                             <i class="clip-search-2"></i>Lọc dữ liệu
                         </button>

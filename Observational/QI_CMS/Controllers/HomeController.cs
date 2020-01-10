@@ -3,6 +3,7 @@ using ES_CapDien.AppCode;
 using ES_CapDien.AppCode.Interface;
 using ES_CapDien.Helpers;
 using ES_CapDien.Models;
+using ES_CapDien.Models.Entity;
 using ES_CapDien.MongoDb.Entity;
 using ES_CapDien.MongoDb.Service;
 using HelperLibrary;
@@ -36,22 +37,23 @@ namespace ES_CapDien.Controllers
             observationService = new ObservationService();
             userProfileService = new UserProfileService();
         }
+        #region Home
         public ActionResult Index()
         {
             int CurrentUserId = WebMatrix.WebData.WebSecurity.CurrentUserId;
-            string userName = WebMatrix.WebData.WebSecurity.CurrentUserName;                        
-            int groupId = userProfileService.userProfileResponsitory.Single(CurrentUserId).Group_Id.Value;
-            if(userName=="administrator")
+            string userName = WebMatrix.WebData.WebSecurity.CurrentUserName;
+            int? groupId = userProfileService.userProfileResponsitory.Single(CurrentUserId).Group_Id;
+            if (userName == "administrator")
             {
                 ViewBag.listSite = sitesService.sitesResponsitory.GetAll().ToList();
             }
             else
             {
-                ViewBag.listSite = sitesService.sitesResponsitory.GetAll().Where(i=>i.Group_Id==groupId).ToList();
+                ViewBag.listSite = sitesService.GetBygroupId(groupId).ToList();
             }
-            ViewBag.lstBieuDo = observationService.observationResponsitory.GetAll().ToList() ;
+            ViewBag.lstBieuDo = observationService.observationResponsitory.GetAll().ToList();
             HomeModel model = new HomeModel();
-            List<Site> sitesInGroup = sitesService.sitesResponsitory.GetAll().Where(i => i.Group_Id == groupId).ToList() ;
+            List<Site> sitesInGroup = sitesService.GetBygroupId(groupId).ToList();
             model.ThietBiHoatDong = sitesInGroup.Where(i => i.IsActive == true).Count();
             model.ThietBiKhongHoatDong = sitesInGroup.Where(i => i.IsActive == false).Count();
             ViewBag.listArea = areasService.GetAreasByGroupId(groupId).ToList();
@@ -62,63 +64,38 @@ namespace ES_CapDien.Controllers
             List<Site> sites = sitesService.GetByAreaId(idArea).ToList();
             return PartialView("_ListSitePartialView", sites);
         }
-        //public ActionResult GetDataAlarm(int siteId)
-        //{
-        //    Site site = sitesService.sitesResponsitory.Single(siteId);
-        //    int deviceId = site.DeviceId.Value;
-        //    List<ES_CapDien.MongoDb.Entity.DataAlarm> dataAlarms = new List<DataAlarm>();
-        //    dataAlarms = dataAlarmMongoService.GetDataByDay(out int total, 300);
-        //    return PartialView("_DataAlarmPartialView", dataAlarms);
-        //}
         public JsonResult GetInfoSite(int siteId)
         {
             Site site = sitesService.sitesResponsitory.Single(siteId);
             return Json(new { listData = site }, JsonRequestBehavior.AllowGet);
         }
-        
+
         public ActionResult GetDataAlarm(int siteId)
         {
-            int deviceId = sitesService.sitesResponsitory.Single(siteId).DeviceId.Value;           
-            List<DataAlarmMongo> dataAlarms = new List<DataAlarmMongo>() ;
-            DateTime from = DateTime.Now;
-            DateTime to = DateTime.Today;
-            dataAlarms = dataAlarmMongoService.GetDataPaging(from, to, 0, 15,deviceId, out int total).Select(i=> new DataAlarmMongo {
-                Id=i._id,
-                AMAFR = i.AMAFR==null?"":i.AMAFR,
-                AMADR = i.AMADR == null ? "" : i.AMADR,
-                AMATI = i.AMATI == null ? "" : i.AMATI,
-                AMIAC = i.AMIAC == null ? "" : i.AMIAC,
-                TimeSend=i.CreatedTime
-            }).ToList();
+            int? deviceId = sitesService.sitesResponsitory.Single(siteId).DeviceId;
+            List<DataAlarmMongo> dataAlarms = new List<DataAlarmMongo>();
+            if (deviceId.HasValue)
+            {
+                DateTime from = DateTime.Now;
+                DateTime to = DateTime.Today;
+                dataAlarms = dataAlarmMongoService.GetDataPaging(from, to, 0, 15, deviceId.Value, out int total).Select(i => new DataAlarmMongo
+                {
+                    Id = i._id,
+                    AMAFR = i.AMAFR == null ? "" : i.AMAFR,
+                    AMADR = i.AMADR == null ? "" : i.AMADR,
+                    AMATI = i.AMATI == null ? "" : i.AMATI,
+                    AMIAC = i.AMIAC == null ? "" : i.AMIAC,
+                    TimeSend = i.DateCreate
+                }).ToList();
+            }
             return PartialView("_DataAlarmPartialView", dataAlarms);
         }
         public ActionResult GetDataObservation(int deviceId)
-        {            
-            List<DataObservationModel> data = new List<DataObservationModel>();
-            DateTime from = DateTime.Now.AddMonths(-2);
-            DateTime to = DateTime.Today;
-            data = dataObservationMongoService.GetDataPagingByDeviceId(from, to, deviceId, 0, 15, out int total).Select(i => new DataObservationModel
-            {
-                NameSite = sitesService.sitesResponsitory.GetAll().Where(j => j.DeviceId == i.Device_Id).FirstOrDefault().Name,
-                DateCreate = i.DateCreate,
-                BTI = i.BTI ,
-                BTO = i.BTO,
-                BHU = i.BHU,
-                BWS = i.BWS,
-                BAP = i.BAP,
-                BAV = i.BAV,
-                BAF = i.BAF,
-                BAC = i.BAC,
-            }).ToList();
-            return PartialView("_DataObservationParialView", data);
-        }
-        public ActionResult GetDataObservationBieuDo(int siteId, int take)
         {
-            int deviceId = sitesService.sitesResponsitory.Single(siteId).DeviceId.Value;
             List<DataObservationModel> data = new List<DataObservationModel>();
-            DateTime from = DateTime.Now.AddMonths(-2);
-            DateTime to = DateTime.Today;
-            data = dataObservationMongoService.GetDataPagingByDeviceId(from, to, deviceId, 0, take, out int total).Select(i => new DataObservationModel
+            DateTime from = DateTime.Today;
+            DateTime to = DateTime.Now;
+            data = dataObservationMongoService.GetDataPagingByDeviceId(from, to, deviceId, 0, 50, out int total).Select(i => new DataObservationModel
             {
                 NameSite = sitesService.sitesResponsitory.GetAll().Where(j => j.DeviceId == i.Device_Id).FirstOrDefault().Name,
                 DateCreate = i.DateCreate,
@@ -131,10 +108,104 @@ namespace ES_CapDien.Controllers
                 BAF = i.BAF,
                 BAC = i.BAC,
             }).ToList();
+            return PartialView("_DataObservationParialView", data);
+        }
+        public ActionResult GetDataObservationBieuDo(int siteId, int take)
+        {
+            int? deviceId = sitesService.sitesResponsitory.Single(siteId).DeviceId;
+            List<DataObservationModel> data = new List<DataObservationModel>();
+            if (deviceId.HasValue)
+            {
+                DateTime from = DateTime.Today;
+                DateTime to = DateTime.Now;
+                data = dataObservationMongoService.GetDataPagingByDeviceId(from, to, deviceId.Value, 0, take, out int total).Select(i => new DataObservationModel
+                {
+                    NameSite = sitesService.sitesResponsitory.GetAll().Where(j => j.DeviceId == i.Device_Id).FirstOrDefault().Name,
+                    DateCreate = i.DateCreate,
+                    BTI = i.BTI,
+                    BTO = i.BTO,
+                    BHU = i.BHU,
+                    BWS = i.BWS,
+                    BAP = i.BAP,
+                    BAV = i.BAV,
+                    BAF = i.BAF,
+                    BAC = i.BAC,
+                }).ToList();
+            }
             return Json(new { listData = data }, JsonRequestBehavior.AllowGet);
         }
-        
-        public ActionResult Management(int page = 1, int pageSize = 50, string title = "", int? areaId = null, string fromDate = "")
+        public ActionResult GetDetailDataAlarm(string alerId)
+        {
+            ES_CapDien.MongoDb.Entity.DataAlarm dataAlarm = new DataAlarm();
+            dataAlarm = dataAlarmMongoService.FindByKey(alerId);
+            dataAlarm.AMATI = dataAlarm.AMATI == null ? "" : dataAlarm.AMATI;
+            dataAlarm.AMIHU = dataAlarm.AMIHU == null ? "" : dataAlarm.AMIHU;
+            dataAlarm.AMADR = dataAlarm.AMADR == null ? "" : dataAlarm.AMADR;
+            dataAlarm.AMAFL = dataAlarm.AMAFL == null ? "" : dataAlarm.AMAFL;
+            dataAlarm.AMAFR = dataAlarm.AMAFR == null ? "" : dataAlarm.AMAFR;
+            dataAlarm.AMIPS = dataAlarm.AMIPS == null ? "" : dataAlarm.AMIPS;
+            dataAlarm.AMIAL = dataAlarm.AMIAL == null ? "" : dataAlarm.AMIAL;
+            dataAlarm.AMIAH = dataAlarm.AMIAH == null ? "" : dataAlarm.AMIAH;
+            dataAlarm.AMIAP = dataAlarm.AMIAP == null ? "" : dataAlarm.AMIAP;
+            dataAlarm.AMIAC = dataAlarm.AMIAC == null ? "" : dataAlarm.AMIAC;
+            dataAlarm.AMIGN = dataAlarm.AMIGN == null ? "" : dataAlarm.AMIGN;
+            dataAlarm.AMIAR = dataAlarm.AMIAR == null ? "" : dataAlarm.AMIAR;
+            dataAlarm.AMIL1 = dataAlarm.AMIL1 == null ? "" : dataAlarm.AMIL1;
+            dataAlarm.AMIH1 = dataAlarm.AMIH1 == null ? "" : dataAlarm.AMIH1;
+            dataAlarm.AMIT1 = dataAlarm.AMIT1 == null ? "" : dataAlarm.AMIT1;
+            dataAlarm.AMIT2 = dataAlarm.AMIT2 == null ? "" : dataAlarm.AMIT2;
+            dataAlarm.AMIL2 = dataAlarm.AMIL2 == null ? "" : dataAlarm.AMIL2;
+            dataAlarm.AMIH2 = dataAlarm.AMIH2 == null ? "" : dataAlarm.AMIH2;
+            return PartialView("_DetailAlarm", dataAlarm);
+        }
+
+        #endregion
+
+        #region Dữ liệu
+        public ActionResult GetDataTable()
+        {
+            DateTime from = DateTime.Today;
+            DateTime to = DateTime.Now;
+            int CurrentUserId = WebMatrix.WebData.WebSecurity.CurrentUserId;
+            string userName = User.Identity.Name;
+            List<Site> sites = new List<Site>();
+            List<DataObservationModel> list = new List<DataObservationModel>();
+            if (userName == "administrator")
+            {
+                sites = sitesService.sitesResponsitory.GetAll().ToList();
+                foreach (var site in sites)
+                {
+                    if (site.DeviceId.HasValue)
+                    {
+                        Data data = dataObservationMongoService.GetDataPagingByDeviceId(from, to, site.DeviceId.Value, 0, 1, out int total).FirstOrDefault();
+                        if (data != null)
+                        {
+                            DataObservationModel model = data.ToModel();
+                            model.NameSite = site.Name;
+                            list.Add(model);
+                        }
+                    }
+
+                }
+            }
+            else
+            {
+                int? groupId = userProfileService.userProfileResponsitory.Single(CurrentUserId).Group_Id;
+                sites = sitesService.GetBygroupId(groupId).ToList();
+                foreach (var site in sites)
+                {
+                    Data data = dataObservationMongoService.GetDataPagingByDeviceId(from, to, site.DeviceId.Value, 0, 1, out int total).FirstOrDefault();
+                    if (data != null)
+                    {
+                        DataObservationModel model = data.ToModel();
+                        model.NameSite = site.Name;
+                        list.Add(model);
+                    }
+                }
+            }
+            return PartialView("_DataTablePartialView", list);
+        }
+        public ActionResult Management(int page = 1, int pageSize = 50, string title = "", int? areaId = null, int? siteId = null, string fromDate = "", string toDate = "")
         {
             ViewBag.Title = "";
             ViewBag.MessageStatus = TempData["MessageStatus"];
@@ -144,15 +215,15 @@ namespace ES_CapDien.Controllers
                 pageSize = CMSHelper.pageSizes[0];
             }
             @ViewBag.PageSizes = CMSHelper.pageSizes;
-            
             int CurrentUserId = WebMatrix.WebData.WebSecurity.CurrentUserId;
-            int groupId = userProfileService.userProfileResponsitory.Single(CurrentUserId).Group_Id.Value;
-            ViewBag.lstTram = sitesService.sitesResponsitory.GetAll().Where(i => i.Group_Id == groupId).ToList();
+            int? groupId = userProfileService.userProfileResponsitory.Single(CurrentUserId).Group_Id;
+            ViewBag.lstTram = sitesService.GetBygroupId(groupId).ToList();
+            ViewBag.lstArea = areasService.GetAreasByGroupId(groupId).ToList();
             string userName = User.Identity.Name;
             int skip = (page - 1) * pageSize;
             DateTime from = DateTime.Today;
-            DateTime to = from.AddDays(1);
-            if (fromDate != "")
+            DateTime to = DateTime.Now;
+            if (fromDate != "" && toDate != null)
             {
                 try
                 {
@@ -161,31 +232,93 @@ namespace ES_CapDien.Controllers
                 }
                 catch { }
             }
+            List<Site> sites = new List<Site>();
             List<DataObservationModel> list = new List<DataObservationModel>();
-            list = dataObservationMongoService.GetDataPaging(from,to, skip, pageSize, out int totalRows).OrderByDescending(i => i.DateCreate).Select(x => new DataObservationModel
+            if (userName == "administrator")
             {
-                BTI = x.BTI,
-                BTO = x.BTO,
-                BHU = x.BHU,
-                BWS = x.BWS,
-                BAP = x.BAP,
-                BAV = x.BAV,
-                BAC = x.BAC,
-                BAF = x.BAF,
-                NameSite = sitesService.sitesResponsitory.GetAll().Where(i => i.DeviceId == x.Device_Id).FirstOrDefault().Name,
-                DateCreate = x.DateCreate
-            }).ToList();
+                sites = sitesService.sitesResponsitory.GetAll().ToList();
+                foreach (var site in sites)
+                {
+                    if (site.DeviceId.HasValue)
+                    {
+                        Data data = dataObservationMongoService.GetDataPagingByDeviceId(from, to, site.DeviceId.Value, 0, 1, out int total).FirstOrDefault();
+                        if (data != null)
+                        {
+                            DataObservationModel model = data.ToModel();
+                            model.NameSite = site.Name;
+                            list.Add(model);
+                        }
+                    }
+                }
+            }
+            else
+            {
+                if (siteId.HasValue)
+                {
+                    var tram = sitesService.sitesResponsitory.Single(siteId);
+                    list = dataObservationMongoService.GetDataPagingByDeviceId(from, to, tram.DeviceId.Value, skip, pageSize, out int total).Select(item => new DataObservationModel
+                    {
+                        DateCreate = item.DateCreate,
+                        BTI = item.BTI,
+                        BTO = item.BTO,
+                        BHU = item.BHU,
+                        BWS = item.BWS,
+                        BAP = item.BAP,
+                        BAV = item.BAV,
+                        BAF = item.BAF,
+                        BAC = item.BAC,
+                        BA1 = item.BA1,
+                        BA2 = item.BA2,
+                        BA3 = item.BA3,
+                        BA4 = item.BA4,
+                        BB1 = item.BB1,
+                        BB2 = item.BB2,
+                        BB3 = item.BB3,
+                        BB4 = item.BB4,
+                        BC1 = item.BC1,
+                        BC2 = item.BC2,
+                        BDR = item.BDR,
+                        BFA = item.BFA,
+                        BFD = item.BFD,
+                        BFL = item.BFL,
+                        BFR = item.BFR,
+                        BPS = item.BPS,
+                        BPW = item.BPW,
+                        BSE = item.BSE,
+                        BT1 = item.BT1,
+                        BT2 = item.BT2,
+                        BV1 = item.BV1,
+                        BV2 = item.BV2,
+                        Device_Id = item.Device_Id,
+                        IsSEQ = item.IsSEQ,
+                        NameSite = tram.Name
+                    }).ToList();
+                }
+                else
+                {
+                    sites = sitesService.GetBygroupId(groupId).ToList();
+                    foreach (var site in sites)
+                    {
+                        Data data = dataObservationMongoService.GetDataPagingByDeviceId(from, to, site.DeviceId.Value, 0, 1, out int total).FirstOrDefault();
+                        if (data != null)
+                        {
+                            DataObservationModel model = data.ToModel();
+                            model.NameSite = site.Name;
+                            list.Add(model);
+                        }
+                    }
+                }
 
-
+            }
             #region Hiển thị dữ liệu và phân trang
             DataObservationViewModel viewModel = new DataObservationViewModel
             {
-                DataO = new StaticPagedList<DataObservationModel>(list, page, pageSize, totalRows),
+                DataO = new StaticPagedList<DataObservationModel>(list, page, pageSize, list.Count()),
                 PagingInfo = new PagingInfo
                 {
                     CurrentPage = page,
                     ItemsPerPage = pageSize,
-                    TotalItems = totalRows
+                    TotalItems = list.Count()
                 },
                 From = from,
                 To = to,
@@ -193,6 +326,8 @@ namespace ES_CapDien.Controllers
             #endregion
             return View(viewModel);
         }
+        #endregion
+
 
     }
 }

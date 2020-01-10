@@ -12,7 +12,7 @@ namespace ES_CapDien.Models.Entity
     [BsonIgnoreExtraElements]
     public class Data : MongoBaseEntity
     {        
-        [BsonDateTimeOptions]
+        [BsonDateTimeOptions(Kind = DateTimeKind.Local)]
         [BsonElement("DateCreate")]
         public DateTime DateCreate { get; set; }
         [BsonElement("IsSEQ")]

@@ -5879,3 +5879,12 @@ td.column-right {
 #myAudio {
 display: none;
 }
+#infoObservation{
+    margin-top:60px !important;
+}
+#BieuDoDuLieu {
+    margin-top: 60px !important;
+}
+#detailAlarm2 {
+    margin-top: 60px !important;
+}

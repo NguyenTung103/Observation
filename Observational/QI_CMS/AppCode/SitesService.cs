@@ -69,5 +69,15 @@ namespace ES_CapDien.AppCode
             query = query.OrderBy(q => q.Id); // Sắp xếp dữ liệu lấy ra theo thứ tự tăng dần           
             return query;
         }
+        public IQueryable<Site> GetBygroupId(int? groupId = null)
+        {
+            IQueryable<Site> query = sitesResponsitory.GetAll(); //Query lấy điều kiện dữ liệu
+            if (groupId.HasValue)
+            {
+                query = query.Where(q => q.Group_Id == groupId);
+            }
+            query = query.OrderBy(q => q.Id); // Sắp xếp dữ liệu lấy ra theo thứ tự tăng dần           
+            return query;
+        }
     }
 }

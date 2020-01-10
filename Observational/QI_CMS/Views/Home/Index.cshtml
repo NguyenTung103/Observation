@@ -451,7 +451,7 @@
             $.ajax({
                 type: "GET",
                 url: '/Home/GetDetailDataAlarm',
-                data: { alarmId: alermID},
+                data: { alerId: alermID},
                 contentType: "application/json; charset=utf-8",
                 dataType: "html",
                 success: function (resuilt) {
@@ -463,7 +463,7 @@
             });
         }
     </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAtArVuBrHkGyTkaNtNMWhAGs_wzbO_rS8&callback=initMap" async defer></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAW1w6eRFuyAvdwkQmSJTMJJ3MhNP3U1I8&callback=initMap" async defer></script>
 }
 
 <style type="text/css">
@@ -499,14 +499,7 @@
         font-size: 15px;
     }
 </style>
-<div class="container" style="border-bottom:none!important; border-left:none!important;">
-    <div class="page-header">
-        <div class="row">
-            <div class="col-md-7">
-                <h1 class="titlepageas"><a class="homcomback" href="/DashBoard/DashBoardManager"><img src="~/Images/home.png" /></a>Trang chủ</h1>
-            </div>
-        </div>
-    </div>
+<div class="container" style="border-bottom:none!important; border-left:none!important;">    
     <div class="col-md-12">
         @Html.Partial("~/Views/Shared/_MessagePartial.cshtml")
         <div class="panel panel-default">
@@ -634,7 +627,7 @@
                     </div>
                     <a href="#infoObservation" data-toggle="modal" class="demo btn btn-blue" id="clickInfo" style="display:none;">
                     </a>
-                    <div id="infoObservation" class="modal container fade in" tabindex="-1" data-focus-on="input:first" style="display: none;">
+                    <div id="infoObservation" class="modal container fade in" tabindex="-1" data-focus-on="input:first" style="display: none;margin-top: 100px;">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
                                 &times;

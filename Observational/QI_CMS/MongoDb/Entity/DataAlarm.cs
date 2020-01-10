@@ -9,8 +9,8 @@ using System.Web;
 namespace ES_CapDien.MongoDb.Entity
 {
     public class DataAlarm : MongoBaseEntity
-    {       
-        [BsonDateTimeOptions]
+    {
+        [BsonDateTimeOptions(Kind = DateTimeKind.Local)]
         [BsonElement("DateCreate")]
         public DateTime DateCreate { get; set; }
         [BsonElement("IsSEQ")]

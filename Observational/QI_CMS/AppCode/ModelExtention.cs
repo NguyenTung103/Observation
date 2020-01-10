@@ -1,4 +1,5 @@
 ﻿using ES_CapDien.Models;
+using ES_CapDien.Models.Entity;
 using System.Text.RegularExpressions;
 
 namespace ES_CapDien.AppCode
@@ -146,7 +147,7 @@ namespace ES_CapDien.AppCode
                     Address = source.Address,
                     DeviceId = source.DeviceId,
                     Area_Id = source.Area_Id,
-                    TimeZone = source.TimeZone
+                    TimeZone = source.TimeZone,                    
                 };
             }
             source.Id = model.Id;
@@ -211,6 +212,48 @@ namespace ES_CapDien.AppCode
             source.IsBieuDo = model.IsBieuDo;
             return source;
         }
+        #endregion
+
+        #region Data
+        public static DataObservationModel ToModel(this Data entity)
+        {
+            return new DataObservationModel()
+            {
+                DateCreate = entity.DateCreate,
+                BTI = entity.BTI,
+                BTO = entity.BTO,
+                BHU = entity.BHU,
+                BWS = entity.BWS,
+                BAP = entity.BAP,
+                BAV = entity.BAV,
+                BAF = entity.BAF,
+                BAC = entity.BAC,
+                BA1= entity.BA1,
+                BA2= entity.BA2,
+                BA3= entity.BA3,
+                BA4= entity.BA4,
+                BB1= entity.BB1,
+                BB2= entity.BB2,
+                BB3= entity.BB3,
+                BB4= entity.BB4,
+                BC1= entity.BC1,
+                BC2= entity.BC2,
+                BDR= entity.BDR,
+                BFA= entity.BFA,
+                BFD= entity.BFD,
+                BFL= entity.BFL,
+                BFR= entity.BFR,
+                BPS= entity.BPS,
+                BPW= entity.BPW,
+                BSE= entity.BSE,
+                BT1= entity.BT1,
+                BT2= entity.BT2,
+                BV1= entity.BV1,
+                BV2= entity.BV2,
+                Device_Id= entity.Device_Id,
+                IsSEQ= entity.IsSEQ
+            };
+        }        
         #endregion
     }
 

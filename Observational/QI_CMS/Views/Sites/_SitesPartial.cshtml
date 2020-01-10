@@ -65,6 +65,14 @@
         </div>
         <div class="form-group">
             <div class="col-sm-1"></div>
+            <label class="col-sm-2 control-label" for="form-field-1">DeviceId<span class="symbol required"></span></label>
+            <div class="col-sm-8">
+                @Html.TextBoxFor(item => item.DeviceId, new { @class = "form-control", @placeholder = "Nhập Id của thiết bị " })
+                @Html.ValidationMessageFor(item => item.DeviceId)
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-1"></div>
             <label class="col-sm-2 control-label" for="form-field-1">Địa chỉ<span class="symbol required"></span></label>
             <div class="col-sm-8">
                 @Html.TextBoxFor(item => item.Address, new { @class = "form-control", @placeholder = "Nhập địa chỉ" })

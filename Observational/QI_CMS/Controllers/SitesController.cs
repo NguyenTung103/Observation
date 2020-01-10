@@ -79,6 +79,7 @@ namespace ES_CapDien.Controllers
                     Id = item.Id,
                     Name = item.Name,
                     Latitude = item.Latitude,
+                    DeviceId = item.DeviceId,
                     Longtitude = item.Longtitude,
                     CreateDay = item.CreateDay,
                     NguoiTao = userProfileService.userProfileResponsitory.Single(item.CreateBy).FullName,

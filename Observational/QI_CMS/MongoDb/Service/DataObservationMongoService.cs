@@ -14,7 +14,7 @@ namespace ES_CapDien.MongoDb.Service
             List<Models.Entity.Data> list = new List<Models.Entity.Data>();
             DateTime from = DateTime.Today;
             DateTime to = DateTime.Today.AddDays(1);
-            list = data.FindAll(i => i.DateCreate < to && i.DateCreate > from).OrderByDescending(i => i.DateCreate).ToList();
+            list = data.FindAll(i => i.DateCreate < to && i.DateCreate > from).ToList();
             totalRow = list.Count();            
             return list;
         }
