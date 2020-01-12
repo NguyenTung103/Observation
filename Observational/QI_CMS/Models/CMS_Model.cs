@@ -171,6 +171,20 @@ namespace ES_CapDien.Models
         public bool? Isroot { get; set; }
         public string NameGroup { get; set; }
     }
+    public class LoginModel
+    {
+        [Required(ErrorMessage = "Tên đăng nhập không để trống")]
+        [Display(Name = "User name")]
+        public string UserName { get; set; }
+
+        [Required(ErrorMessage = "Mật khẩu không để trống")]
+        [DataType(DataType.Password)]
+        [Display(Name = "Password")]
+        public string Password { get; set; }
+
+        [Display(Name = "Remember me?")]
+        public bool RememberMe { get; set; }
+    }
     public class UserModel
     {
         public string FullName { get; set; }

@@ -3964,7 +3964,6 @@
     <Content Include="Views\LoginAccount\ChangePass.cshtml" />
     <Content Include="Views\LoginAccount\Login.cshtml" />
     <Content Include="Views\LoginAccount\ThongBaoRederect.cshtml" />
-    <Content Include="Views\LoginAccount\_LoadDMDonViByMaCap.cshtml" />
     <Content Include="Views\Accounts\Create.cshtml" />
     <Content Include="Views\Accounts\Management.cshtml" />
     <Content Include="Views\Accounts\_UserProfilePartial.cshtml" />

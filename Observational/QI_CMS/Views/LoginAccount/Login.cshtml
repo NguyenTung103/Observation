@@ -43,23 +43,7 @@
     {
         @Html.AntiForgeryToken()
         @Html.Partial("~/Views/Shared/_MessagePartial.cshtml")
-        <input type="hidden" name="ReturnUrl" value='@Request.Params["ReturnUrl"]' />
-        <div class="form-group">
-            <select id="ddl_DVIQLY" class="form-control search-select" style="margin-top: -3px;" name="searchDviqly">
-                @foreach (var item in @ViewBag.listDonVi)
-                {
-                    if (item.Code == Request.Params["searchDviqly"])
-                    {
-                        <option value="@item.Code" selected="selected">@item.Code</option>
-                    }
-                    else
-                    {
-                        <option value="@item.Code">@item.Code</option>
-                    }
-                }
-            </select>
-
-        </div>
+        <input type="hidden" name="ReturnUrl" value='@Request.Params["ReturnUrl"]' />        
         <div class="form-group">
             <span class="input-icon">
                 @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", @placeholder = "Tài khoản", @autofocus = "autofocus" })

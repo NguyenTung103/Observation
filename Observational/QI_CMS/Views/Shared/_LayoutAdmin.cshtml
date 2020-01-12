@@ -106,7 +106,7 @@
                             </li>
                             <li class="divider"></li>
                             <li>
-                                @using (Html.BeginForm("LogOff", "Admin", FormMethod.Post, new { id = "logoutForm" }))
+                                @using (Html.BeginForm("LogOff", "LoginAccount", FormMethod.Post, new { id = "logoutForm" }))
                                 {
                                     @Html.AntiForgeryToken()
                                     <a href="javascript:document.getElementById('logoutForm').submit()">

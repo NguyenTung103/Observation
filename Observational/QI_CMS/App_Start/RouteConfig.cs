@@ -11,7 +11,7 @@ namespace ES_CapDien
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-            defaults: new { controller = "Admin", action = "DangNhap", id = UrlParameter.Optional }
+            defaults: new { controller = "LoginAccount", action = "Login", id = UrlParameter.Optional }
             );
             //defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             //    );
