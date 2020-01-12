@@ -253,7 +253,27 @@ namespace ES_CapDien.AppCode
                 Device_Id= entity.Device_Id,
                 IsSEQ= entity.IsSEQ
             };
-        }        
+        }
+        #endregion
+        #region Role
+        public static RoleModel ToModel(this webpages_Roles role)
+        {
+            return new RoleModel()
+            {
+                Id = role.RoleId,
+                RoleName = role.RoleName,
+                Description = role.Description,                
+            };
+        }
+        public static webpages_Roles ToEntity(this RoleModel model)
+        {
+            return new webpages_Roles()
+            {
+                RoleId = model.Id,
+                RoleName = model.RoleName,
+                Description = model.Description,                
+            };
+        }
         #endregion
     }
 

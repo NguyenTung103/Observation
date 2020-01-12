@@ -1,5 +1,5 @@
 ﻿@using ES_CapDien.Models
-@model ObservationModel
+@model ObservationsModel
 @{
     ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
@@ -22,7 +22,7 @@
             <i class="fa fa-external-link-square"></i><b>@ViewBag.Title</b>
         </div>
         <div class="panel-body">
-            @using (Html.BeginForm("Create", "Observation", new { page = Request.Params["page"], pageSize = Request.Params["pageSize"], title = Request.Params["title"] }, FormMethod.Post, new { @class = "form-horizontal", enctype = "multipart/form-data" }))
+            @using (Html.BeginForm("Create", "Observational", new { page = Request.Params["page"], pageSize = Request.Params["pageSize"], title = Request.Params["title"] }, FormMethod.Post, new { @class = "form-horizontal", enctype = "multipart/form-data" }))
             {
                 @Html.AntiForgeryToken()
                 @Html.ValidationSummary()

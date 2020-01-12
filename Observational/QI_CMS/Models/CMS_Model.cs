@@ -148,4 +148,52 @@ namespace ES_CapDien.Models
         public System.DateTime TimeSend { get; set; }
         public string NameSite { get; set; }
     }
+    public class UserProfileModel
+    {
+        public int UserId { get; set; }
+        [Required(ErrorMessage = "Tên đăng nhập không để trống")]
+        public string UserName { get; set; }
+        public string FullName { get; set; }
+        [Required(ErrorMessage = "Email không để trống")]
+        public string Email { get; set; }
+        [Required(ErrorMessage = "Số điện thoại không để trống")]
+        public string PhoneNumber { get; set; }
+        public string SkypeID { get; set; }
+        public string CompanyName { get; set; }
+        public string Address { get; set; }
+        public Nullable<int> GenderId { get; set; }
+        public Nullable<int> Group_Id { get; set; }
+        public string CmisUserType { get; set; }       
+        public bool? IsActive { get; set; }                
+        [Required(ErrorMessage = "Mật khẩu không để trống")]
+        public string Password { get; set; }
+        //custom
+        public bool? Isroot { get; set; }
+        public string NameGroup { get; set; }
+    }
+    public class UserModel
+    {
+        public string FullName { get; set; }
+        public string Email { get; set; }
+        public string PhoneNumber { get; set; }
+        public int? GroupId { get; set; }      
+
+    }
+    public class RoleModel
+    {
+        public int Id { get; set; }
+        public string RoleName { get; set; }
+        public string Description { get; set; }
+        public string GroupId { get; set; }
+        public IEnumerable<TreeItem<Administrator_MenuModel>> administratorMenuTree { get; set; }
+    }
+    public class Administrator_MenuModel
+    {
+        public Guid MenuId { get; set; }
+        public Guid PageId { get; set; }
+        public bool isHas { get; set; }
+        public System.Guid ParentId { get; set; }
+        public string Name { get; set; }
+        public int Index { get; set; }
+    }
 }

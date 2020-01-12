@@ -283,6 +283,11 @@
     <Compile Include="Alarm.cs">
       <DependentUpon>ObservationEntitries.tt</DependentUpon>
     </Compile>
+    <Compile Include="AppCode\AuthorizeService.cs" />
+    <Compile Include="AppCode\MembershipService.cs" />
+    <Compile Include="AppCode\UsersProfileService.cs" />
+    <Compile Include="Controllers\AccountsController.cs" />
+    <Compile Include="Controllers\AuthorizeController.cs" />
     <Compile Include="Controllers\BaseMongoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Datum.cs">
@@ -3956,6 +3961,15 @@
     <Content Include="Views\Home\_ListSiteSearchPartialView.cshtml" />
     <Content Include="Views\Home\_SitePartialView.cshtml" />
     <Content Include="Views\Home\_ThongTinDiaDiemPartialView.cshtml" />
+    <Content Include="Views\LoginAccount\ChangePass.cshtml" />
+    <Content Include="Views\LoginAccount\Login.cshtml" />
+    <Content Include="Views\LoginAccount\ThongBaoRederect.cshtml" />
+    <Content Include="Views\LoginAccount\_LoadDMDonViByMaCap.cshtml" />
+    <Content Include="Views\Accounts\Create.cshtml" />
+    <Content Include="Views\Accounts\Management.cshtml" />
+    <Content Include="Views\Accounts\_UserProfilePartial.cshtml" />
+    <Content Include="Views\Authorize\Index.cshtml" />
+    <Content Include="Views\Authorize\_ListRoles.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

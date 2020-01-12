@@ -14,7 +14,7 @@ namespace ES_CapDien.Controllers
         public ActionResult LogOff(string returnUrl)
         {
             WebSecurity.Logout();
-            return RedirectToAction("Login");
+            return Redirect("/Administrator/Account/Login");
         }
     }
 }

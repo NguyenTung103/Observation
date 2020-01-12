@@ -35,6 +35,16 @@ namespace ES_CapDien.Models
         public StaticPagedList<SiteModel> Sites { get; set; }
         public PagingInfo PagingInfo { get; set; }
     }
+    public class UserProfileViewModel
+    {
+        public StaticPagedList<UserProfileModel> UsP { get; set; }
+        public PagingInfo PagingInfo { get; set; }        
+    }
+    public class RoleViewModel
+    {
+        public StaticPagedList<RoleModel> Role { get; set; }
+        public PagingInfo PagingInfo { get; set; }
+    }
     public class DataObservationViewModel
     {
         public StaticPagedList<DataObservationModel> DataO { get; set; }

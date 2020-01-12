@@ -1,0 +1,5 @@
+﻿@model IEnumerable<ES_CapDien.DMDonVi>
+@foreach (var item in Model)
+{
+    <option value="@item.Code">(@item.Code) - @item.Name</option>
+}
