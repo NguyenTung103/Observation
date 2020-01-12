@@ -155,8 +155,7 @@ namespace ES_CapDien.Models
         public string UserName { get; set; }
         public string FullName { get; set; }
         [Required(ErrorMessage = "Email không để trống")]
-        public string Email { get; set; }
-        [Required(ErrorMessage = "Số điện thoại không để trống")]
+        public string Email { get; set; }        
         public string PhoneNumber { get; set; }
         public string SkypeID { get; set; }
         public string CompanyName { get; set; }
@@ -190,7 +189,7 @@ namespace ES_CapDien.Models
         public string FullName { get; set; }
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
-        public int? GroupId { get; set; }      
+        public int? Group_Id { get; set; }      
 
     }
     public class RoleModel

@@ -26,7 +26,7 @@
 <div class="form-group">
     <label class="col-sm-2 control-label" for="form-field-1">Nhập mật khẩu</label>
     <div class="col-sm-10">
-        @Html.PasswordFor(item => item.Password, new { @class = "form-control", @placeholder = "Nhập tên đăng nhập" })
+        @Html.PasswordFor(item => item.Password, new { @class = "form-control", @placeholder = "Nhập mật khẩu" })
         @Html.ValidationMessageFor(item => item.Password)
     </div>
 </div>
@@ -47,9 +47,9 @@
 </div>
 <div class="form-group">
     <label class="col-sm-2 control-label" for="form-field-1">Nhóm <span class="symbol required"></span></label>
-    <div class="col-sm-9" style="color:black">
+    <div class="col-sm-10" style="color:black">
         <select id="listAddsPosstions" class="form-control search-select" name="Group_Id">
-            <option value="">--Chọn đơn vị--</option>
+            <option value="">--Chọn nhóm--</option>
             @if (@ViewBag.Groups != null)
             {
                 foreach (var item in @ViewBag.Groups)

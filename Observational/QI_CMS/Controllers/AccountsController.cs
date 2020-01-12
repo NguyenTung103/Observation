@@ -89,7 +89,7 @@ namespace ES_CapDien.Controllers
         [HttpPost]
         [ValidateInput(false)]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(UserProfileModel model, string donVi="")
+        public ActionResult Create(UserProfileModel model)
         {            
             if (ModelState.IsValid)
             {
@@ -97,7 +97,7 @@ namespace ES_CapDien.Controllers
                 UserProfile user = new UserProfile();
                 UserModel userModel = new UserModel();                
                 userModel.FullName = model.FullName;
-                userModel.GroupId = model.Group_Id;
+                userModel.Group_Id = model.Group_Id;
                 userModel.Email = model.Email;
                 bool checkSave = false;
                 user.UserName = model.UserName;

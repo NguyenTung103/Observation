@@ -3771,6 +3771,7 @@
     <Content Include="Style\fonts\fontawesome-webfont.svg" />
     <Content Include="Style\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Style\images\iconAdmin.png" />
+    <Content Include="Style\images\logo-aks.png" />
     <Content Include="Style\js\bootstrap.min.js" />
     <Content Include="Style\js\jquery.min.1.12.4.js" />
     <Content Include="Style\js\jquery.smartmenus.bootstrap.js" />
